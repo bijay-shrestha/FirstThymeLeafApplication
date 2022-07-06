@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fairfield Library website - Publisher</title>
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <main>
+        <h1>List of our publishers!!</h1>
+        <a href="/fairfieldlibrary/publisher/new">Add New Publisher</a>
+        <form method="post" action="/fairfieldlibrary/publisher/new" th:object="${publisher}">
+            <fieldset>
+                <legend>New Publisher Form</legend>
+                <div>Fields marked with * are required</div>
+                <div>
+                    <label>Publisher Name*</label>
+                </div>
+                <div>
+                    <div><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></span></div>
+                    <input name="name" type="text" th:value="${publisher.name}" autofocus>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Primary Address</legend>
+                <div>
+                    <label>Street</label>
+                </div>
+                <div>
+                    <input name="street" type="text" th:field="*{primaryAddress.street}">
+                </div>
+                <div>
+                    <label>City</label>
+                </div>
+                <div>
+                    <input name="city" type="text" th:field="*{primaryAddress.city}">
+                </div>
+                <div>
+                    <label>State</label>
+                </div>
+                <div>
+                    <input name="state" type="text" th:field="*{primaryAddress.state}">
+                </div>
+                <div>
+                    <label>Zip</label>
+                </div>
+                <div>
+                    <input name="zipCode" type="text" th:field="*{primaryAddress.zipCode}">
+                </div>
+            </fieldset>
+            <input type="button" value="Cancel"/>
+            <input type="reset" value="Reset"/>
+            <input type="submit" value="Add Publisher"/>
+        </form>
+    </main>
+</body>
+</html>

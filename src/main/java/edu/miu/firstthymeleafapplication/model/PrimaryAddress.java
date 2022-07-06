@@ -73,9 +73,19 @@ public class PrimaryAddress {
 //    public void setZipCode(String zipCode) {
 //        this.zipCode = zipCode;
 //    }
+//    @Override
+//    public String toString() {
+//        return String.format("{AddressId: %d, Street: %s, City: %s, State: %s, ZipCode: %s}"
+//                , addressId, street, city, state, zipCode);
+//    }
+
     @Override
     public String toString() {
-        return String.format("{AddressId: %d, Street: %s, City: %s, State: %s, ZipCode: %s}"
-                , addressId, street, city, state, zipCode);
+        return "PrimaryAddress{" +
+                "street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
     }
 }

@@ -12,9 +12,9 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer publisherId;
     @Column(name = "publisher_name", nullable = false)
-    @NotNull(message = "Publisher Name cannot be null")
-    @NotEmpty(message = "Publisher Name cannot be empty")// name = "";
-    @NotBlank(message = "Publisher Name cannot be blank spaces")// name="   "
+//    @NotNull(message = "Publisher Name cannot be null")
+//    @NotEmpty(message = "Publisher Name cannot be empty")// name = "";
+    @NotBlank(message = "Publisher Name cannot be null or empty or blank spaces")// name="   "
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
