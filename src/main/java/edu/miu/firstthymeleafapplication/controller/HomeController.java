@@ -14,4 +14,9 @@ public class HomeController {
     public String displayHomepage(){
         return "public/index";
     }
+
+    @GetMapping(value = {"/about", "/fairfieldlibrary/about"})
+    public String displayAboutpag(){
+        return "public/about";
+    }
 }
