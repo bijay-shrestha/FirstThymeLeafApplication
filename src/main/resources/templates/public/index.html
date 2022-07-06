@@ -5,14 +5,9 @@
     <title>Fairfield Library website - Home</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/">Home</a> |
-            <a href="/fairfieldlibrary/about">About</a>
-        </nav>
-    </header>
-    <main>
-        <h1> Hello Spring WebApp 101!!!</h1>
-    </main>
+<header th:replace="fragments/header :: header"></header>
+<main>
+    <h1> Hello Spring WebApp 101!!!</h1>
+</main>
 </body>
 </html>

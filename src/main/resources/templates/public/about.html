@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Fairfield Library Website - About</title>
 </head>
 <body>
-<header>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/fairfieldlibrary/about">About</a>
-    </nav>
-</header>
+<header th:replace="fragments/header :: header"></header>
 <main>
     <h1> About the library</h1>
 </main>
