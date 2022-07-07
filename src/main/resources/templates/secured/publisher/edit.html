@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Fairfield Library website - New Publisher</title>
+    <title>Fairfield Library website - Edit Publisher</title>
     <style>
         a.std-lnk-btn {
             text-decoration:none;color: #000000;border: 1px solid #000000;padding: 0.20em;background-color: #efefef;
@@ -13,14 +13,14 @@
     </style>
 </head>
 <body>
-<header th:replace="fragments/header :: header"></header>
+    <header th:replace="fragments/header :: header"></header>
     <main>
-        <h1>New Publisher Form</h1>
+        <h1>Edit Publisher Form</h1>
         <div style="border: 1px solid;padding: 1em;">
             <div>
                 Fields marked with asterisk (*) are required.
             </div>
-            <form method="post" action="/fairfieldlibrary/publisher/new" th:object="${publisher}">
+            <form method="post" action="/fairfieldlibrary/publisher/update" th:object="${publisher}">
                 <fieldset>
                     <div>
                         <label>Publisher Name*</label>
@@ -60,7 +60,7 @@
                 <div style="margin-top: 1em;">
                     <a class="std-lnk-btn" href="/fairfieldlibrary/publisher/list">Cancel</a>
                     <input class="std-btn" type="reset" value="Reset">
-                    <input class="std-btn" type="submit" value="Add Publisher">
+                    <input class="std-btn" type="submit" value="Update Publisher">
                 </div>
             </form>
         </div>

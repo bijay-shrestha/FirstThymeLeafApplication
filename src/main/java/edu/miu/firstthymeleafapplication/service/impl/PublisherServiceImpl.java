@@ -3,6 +3,7 @@ package edu.miu.firstthymeleafapplication.service.impl;
 import edu.miu.firstthymeleafapplication.model.Publisher;
 import edu.miu.firstthymeleafapplication.repository.PublisherRepository;
 import edu.miu.firstthymeleafapplication.service.PublisherService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public List<Publisher> getAllPublishers() {
-        var publishers = publisherRepository.findAll();
+        var publishers = publisherRepository.findAll(Sort.by("name"));
         return publishers;
     }
 

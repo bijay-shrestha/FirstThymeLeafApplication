@@ -1,27 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Fairfield Library website - Publisher</title>
+    <title>Fairfield Library website - Home</title>
+    <style>
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            border: 1px solid;
+            padding: 1em;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
 <main>
-    <a href="/fairfieldlibrary/publisher/new">Add New Publisher</a>
-    <h1>List of our publishers!!</h1>
+    <h1>List of our Publishers</h1>
+    <div>
+        <p><a href="/fairfieldlibrary/publisher/new">Add New Publisher</a></p>
+    </div>
     <table>
         <thead>
-            <tr>
-                <th>#</th>
-                <th>Publisher Name</th>
-                <th>Primary Address</th>
-            </tr>
+        <tr>
+            <th>#</th>
+            <th>Publisher Name</th>
+            <th>Primary Address</th>
+            <th></th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         <tr th:each="publisher, counter : ${publishers}">
-            <th th:text="${counter.count}"></th>
+            <th th:text="${counter.count}+${'.'}"></th>
             <td th:text="${publisher.name}"></td>
-            <td th:if="${publisher.primaryAddress != null}" th:text="${publisher.primaryAddress.street}"></td>
+            <td th:if="${publisher.primaryAddress != null}">
+                <p>
+                    <span th:text="${publisher.primaryAddress.street}"></span><br>
+                    <span th:text="${publisher.primaryAddress.city}+${', '}+${publisher.primaryAddress.state}+${' '}+${publisher.primaryAddress.zipCode}"></span>
+                </p>
+            </td>
+            <td th:if="${publisher.primaryAddress == null}"></td>
+            <td><a th:href="@{'/fairfieldlibrary/publisher/edit/{publisherId}'(publisherId=${publisher.publisherId})}">Edit</a> </td>
+            <td>Delete</td>
         </tr>
         </tbody>
     </table>
