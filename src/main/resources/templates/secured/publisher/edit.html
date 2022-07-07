@@ -22,6 +22,7 @@
             </div>
             <form method="post" action="/fairfieldlibrary/publisher/update" th:object="${publisher}">
                 <fieldset>
+                    <input name="publisherId" type="hidden" th:value="${publisher.publisherId}"/>
                     <div>
                         <label>Publisher Name*</label>
                     </div>

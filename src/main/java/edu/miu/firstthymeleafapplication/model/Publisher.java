@@ -22,12 +22,16 @@ public class Publisher {
     private PrimaryAddress primaryAddress;
 
     public Publisher() {
-        this(null, null);
     }
 
     public Publisher(Integer publisherId, String name) {
         this.publisherId = publisherId;
         this.name = name;
+    }
+
+    public Publisher(String name, PrimaryAddress primaryAddress) {
+        this.name = name;
+        this.primaryAddress = primaryAddress;
     }
 
     public Integer getPublisherId() {

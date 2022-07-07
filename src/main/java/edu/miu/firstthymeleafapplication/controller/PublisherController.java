@@ -40,26 +40,59 @@ public class PublisherController {
         return "/secured/publisher/new";
     }
 
-    @PostMapping(value = {"/new"})
+    @PostMapping(value = {"/new"}) // PRG: Post-Redirect-Get
     public String addNewPublisher(@Valid @ModelAttribute("publisher") Publisher publisher,
-                                  BindingResult bindingResult,
-                                  Model model) {
-        if (bindingResult.hasErrors()) {
+                                  BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
             model.addAttribute("publisher", publisher);
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "/secured/publisher/new";
+            return "secured/publisher/new";
         }
+        checkIfContainsPrimaryAddress(publisher);
         publisherService.addNewPublisher(publisher);
         return "redirect:/fairfieldlibrary/publisher/list";
     }
 
-    @GetMapping("/edit/{publisherId}")
+    @GetMapping(value = "/edit/{publisherId}")
     public String editPublisher(Model model, @PathVariable Integer publisherId) {
         var publisher = publisherService.getPublisherById(publisherId);
         if (publisher != null) {
             model.addAttribute("publisher", publisher);
             return "/secured/publisher/edit";
         }
+        return "redirect:/fairfieldlibrary/publisher/list";
+    }
+
+    @PostMapping(value = "/update")
+    public String updatePublisher(@Valid @ModelAttribute("publisher") Publisher publisher,
+                                  BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("publisher", publisher);
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "/secured/publisher/edit";
+        }
+        checkIfContainsPrimaryAddress(publisher);
+        publisherService.updatePublisher(publisher);
+        return "redirect:/fairfieldlibrary/publisher/list";
+
+
+    }
+
+    private void checkIfContainsPrimaryAddress(@ModelAttribute("publisher") @Valid Publisher publisher) {
+        if (publisher.getPrimaryAddress() != null) {
+            if (publisher.getPrimaryAddress().getStreet().equals("")
+                    && publisher.getPrimaryAddress().getCity().equals("")
+                    && publisher.getPrimaryAddress().getState().equals("")
+                    && publisher.getPrimaryAddress().getZipCode().equals("")
+            ) {
+                publisher.setPrimaryAddress(null);
+            }
+        }
+    }
+
+    @GetMapping(value = "/delete/{publisherId}")
+    public String deletePublisher(@PathVariable Integer publisherId){
+        publisherService.deletePublisherById(publisherId);
         return "redirect:/fairfieldlibrary/publisher/list";
     }
 

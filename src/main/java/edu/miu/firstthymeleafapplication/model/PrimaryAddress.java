@@ -1,5 +1,6 @@
 package edu.miu.firstthymeleafapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,17 @@ public class PrimaryAddress {
     private String zipCode;
 
     @OneToOne(mappedBy = "primaryAddress")
+    @JsonIgnore
     private Publisher publisher;
 
-//    public PrimaryAddress(Integer addressId, String street, String city, String state, String zipCode) {
+    public PrimaryAddress(String street, String city, String state, String zipCode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    //    public PrimaryAddress(Integer addressId, String street, String city, String state, String zipCode) {
 //        this.addressId = addressId;
 //        this.street = street;
 //        this.city = city;

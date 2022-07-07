@@ -28,7 +28,8 @@ public class FirstThymeLeafApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Hello World SpringBoot!!!");
-        Publisher mcg = new Publisher(null, "McGraw-Hill");
+        Publisher mcg = new Publisher("McGraw-Hill",
+                new PrimaryAddress("1000N Fouth Street", "Fairfield", "Iowa", "52557"));
         System.out.println(createNewPublisher(mcg));
         Publisher wiley = new Publisher(null, "John Wiley and Sons");
         System.out.println(createNewPublisher(wiley));
