@@ -1,11 +1,20 @@
 package edu.miu.firstthymeleafapplication.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor (staticName = "build")
 @Table(name = "publishers")
 public class Publisher {
     @Id
@@ -20,9 +29,6 @@ public class Publisher {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="primary_addr_id", nullable = true)
     private PrimaryAddress primaryAddress;
-
-    public Publisher() {
-    }
 
     public Publisher(Integer publisherId, String name) {
         this.publisherId = publisherId;

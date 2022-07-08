@@ -1,8 +1,9 @@
-package edu.miu.firstthymeleafapplication.service.impl;
+package edu.miu.firstthymeleafapplication.service.v1.impl;
 
+import edu.miu.firstthymeleafapplication.exception.PublisherNotFoundException;
 import edu.miu.firstthymeleafapplication.model.Publisher;
 import edu.miu.firstthymeleafapplication.repository.PublisherRepository;
-import edu.miu.firstthymeleafapplication.service.PublisherService;
+import edu.miu.firstthymeleafapplication.service.v1.PublisherService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,9 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public Publisher getPublisherById(Integer publisherId) {
+    public Publisher getPublisherById(Integer publisherId) throws PublisherNotFoundException {
         return publisherRepository.findById(publisherId)
-                .orElse(null);
+                .orElseThrow(()-> new PublisherNotFoundException("Publisher with ID " + publisherId +  " Not Found"));
     }
 
     @Override

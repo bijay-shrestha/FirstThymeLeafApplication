@@ -1,14 +1,14 @@
 package edu.miu.firstthymeleafapplication.controller.v2;
 
+import edu.miu.firstthymeleafapplication.dto.PublisherRequest;
+import edu.miu.firstthymeleafapplication.exception.PublisherNotFoundException;
 import edu.miu.firstthymeleafapplication.model.Publisher;
-import edu.miu.firstthymeleafapplication.service.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.miu.firstthymeleafapplication.service.v2.PublisherRestAPIService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -19,20 +19,38 @@ import java.util.List;
 @RequestMapping("/api/v2/fairfieldlibrary/publisher")
 public class PublisherRestController {
 
-    private final PublisherService publisherService;
+    private final PublisherRestAPIService publisherRestAPIService;
 
-    public PublisherRestController(PublisherService publisherService) {
-        this.publisherService = publisherService;
+    public PublisherRestController(PublisherRestAPIService publisherRestAPIService) {
+        this.publisherRestAPIService = publisherRestAPIService;
     }
 
     @GetMapping(value = {"/list"})
     public ResponseEntity<List<Publisher>> listPublishers(){
-        return ResponseEntity.ok(publisherService.getAllPublishers());
+        return ResponseEntity.ok(publisherRestAPIService.getAllPublishers());
     }
 
     @GetMapping(value = "/{publisherId}")
-    public ResponseEntity<Publisher> getPublisherById(@PathVariable Integer publisherId){
-        return ResponseEntity.ok(publisherService.getPublisherById(publisherId));
+    public ResponseEntity<Publisher> getPublisherById(@PathVariable Integer publisherId) throws PublisherNotFoundException {
+        return ResponseEntity.ok(publisherRestAPIService.getPublisherById(publisherId));
+    }
+
+    @PostMapping(value = "/new")
+    public ResponseEntity<Publisher> addNewPublisher(@Valid @RequestBody PublisherRequest publisherRequest){
+        return new ResponseEntity<>(publisherRestAPIService.addNewPublisher(publisherRequest), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/update/{publisherId}")
+    public ResponseEntity<Publisher> updatePublisher(@PathVariable Integer publisherId,
+                                                     @Valid @RequestBody PublisherRequest publisherRequest)
+            throws PublisherNotFoundException{
+        return new ResponseEntity<>(publisherRestAPIService.updatePublisher(publisherId, publisherRequest),HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete/{publisherId}")
+    public ResponseEntity.HeadersBuilder<ResponseEntity.BodyBuilder> deletePublisher(@PathVariable Integer publisherId){
+        publisherRestAPIService.deletePublisherById(publisherId);
+        return ResponseEntity.status(HttpStatus.OK);
     }
 
 }

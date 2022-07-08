@@ -1,9 +1,10 @@
 package edu.miu.firstthymeleafapplication;
 
+import edu.miu.firstthymeleafapplication.exception.PublisherNotFoundException;
 import edu.miu.firstthymeleafapplication.model.PrimaryAddress;
 import edu.miu.firstthymeleafapplication.model.Publisher;
-import edu.miu.firstthymeleafapplication.service.PrimaryAddressService;
-import edu.miu.firstthymeleafapplication.service.PublisherService;
+import edu.miu.firstthymeleafapplication.service.v1.PrimaryAddressService;
+import edu.miu.firstthymeleafapplication.service.v1.PublisherService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +36,7 @@ public class FirstThymeLeafApplication implements CommandLineRunner {
         System.out.println(createNewPublisher(wiley));
         printAllPublishers();
         printPublisherById(1);
-        printPublisherById(10);
+        printPublisherById(2);
         updateAndPrintPublisherById(1);
 //        deletePublisherById(3);
         System.out.println("Finished execution");
@@ -50,7 +51,7 @@ public class FirstThymeLeafApplication implements CommandLineRunner {
         publishers.forEach(System.out::println);
     }
 
-    private void printPublisherById(Integer publisherId) {
+    private void printPublisherById(Integer publisherId) throws PublisherNotFoundException {
         var publisher = publisherService.getPublisherById(publisherId);
         if(publisher != null) {
             System.out.println(publisher);
@@ -59,7 +60,7 @@ public class FirstThymeLeafApplication implements CommandLineRunner {
         }
     }
 
-    private void updateAndPrintPublisherById(Integer publisherId) { // U: Update
+    private void updateAndPrintPublisherById(Integer publisherId) throws PublisherNotFoundException { // U: Update
         var publisher = publisherService.getPublisherById(publisherId);
         publisher.setName("McGraw-Hill, Inc.");
         var mcgAddr = new PrimaryAddress(null, "1000 N Court Street", "Cleveland",

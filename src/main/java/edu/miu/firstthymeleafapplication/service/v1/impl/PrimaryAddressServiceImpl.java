@@ -1,8 +1,8 @@
-package edu.miu.firstthymeleafapplication.service.impl;
+package edu.miu.firstthymeleafapplication.service.v1.impl;
 
 import edu.miu.firstthymeleafapplication.model.PrimaryAddress;
 import edu.miu.firstthymeleafapplication.repository.PrimaryAddressRepository;
-import edu.miu.firstthymeleafapplication.service.PrimaryAddressService;
+import edu.miu.firstthymeleafapplication.service.v1.PrimaryAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

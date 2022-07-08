@@ -1,4 +1,4 @@
-package edu.miu.firstthymeleafapplication.service;
+package edu.miu.firstthymeleafapplication.service.v1;
 
 import edu.miu.firstthymeleafapplication.model.Book;
 

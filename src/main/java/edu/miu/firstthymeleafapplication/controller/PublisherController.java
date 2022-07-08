@@ -1,7 +1,8 @@
 package edu.miu.firstthymeleafapplication.controller;
 
+import edu.miu.firstthymeleafapplication.exception.PublisherNotFoundException;
 import edu.miu.firstthymeleafapplication.model.Publisher;
-import edu.miu.firstthymeleafapplication.service.PublisherService;
+import edu.miu.firstthymeleafapplication.service.v1.PublisherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,7 +55,7 @@ public class PublisherController {
     }
 
     @GetMapping(value = "/edit/{publisherId}")
-    public String editPublisher(Model model, @PathVariable Integer publisherId) {
+    public String editPublisher(Model model, @PathVariable Integer publisherId) throws PublisherNotFoundException {
         var publisher = publisherService.getPublisherById(publisherId);
         if (publisher != null) {
             model.addAttribute("publisher", publisher);
